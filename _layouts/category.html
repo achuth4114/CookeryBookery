@@ -3,9 +3,9 @@ layout: default
 ---
 <p><a href="{{ '/' | relative_url }}">🏡 Home</a> / <a href="{{ '/catalogue/' | relative_url }}">📚 All recipes</a></p>
 <h1>{{ page.emoji }} {{ page.title }}</h1>
-<p>🎯 Choose a recipe below, or explore it by cuisine and taste.</p>
+<p>🎯 Find a favourite recipe, or browse using another path.</p>
 {% if page.category_type == 'meals' %}
-<p><a href="{{ '/cuisines/' | relative_url }}">🌍 Find by cuisine</a> · <a href="{{ '/tastes/' | relative_url }}">😋 Find by taste</a></p>
+<p>🌍 <a href="{{ '/meals/' | append: page.category_slug | append: '/cuisines/' | relative_url }}">Find by cuisine</a> · 😋 <a href="{{ '/meals/' | append: page.category_slug | append: '/tastes/' | relative_url }}">Find by taste</a></p>
 {% endif %}
 <ul class="recipe-list">
 {% assign recipes = site.pages | where: "layout", "recipe" | sort: "title" %}
@@ -13,6 +13,7 @@ layout: default
 {% assign tags = recipe[page.category_type] %}
 {% if tags contains page.category_slug %}
 <li>🍴 <a href="{{ recipe.url | relative_url }}">{{ recipe.title | escape }}</a></li>
-{% endif %}{% endfor %}
+{% endif %}
+{% endfor %}
 </ul>
 <p><a href="{{ '/' | relative_url }}">⬅️ Back home</a></p>

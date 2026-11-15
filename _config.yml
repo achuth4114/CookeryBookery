@@ -4,4 +4,4 @@ markdown: kramdown
 permalink: pretty
 url: ""
 baseurl: "/CookeryBookery"
-exclude: [README.md, data, REVIEW_QUEUE.md, PUBLISHING_CHECKLIST.md]
+exclude: [README.md, LICENSE, PUBLISHING_CHECKLIST.md]
