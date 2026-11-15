@@ -1,0 +1,18 @@
+---
+layout: default
+---
+<p><a href="{{ '/' | relative_url }}">🏡 Home</a> / <a href="{{ '/catalogue/' | relative_url }}">📚 All recipes</a></p>
+<h1>🍽️ {{ page.title | escape }}</h1>
+<img class="recipe-photo" src="https://img.youtube.com/vi/{{ page.video_id }}/hqdefault.jpg" alt="YouTube thumbnail for {{ page.title | escape }}">
+<p>📸 Original YouTube video thumbnail</p>
+<div class="tags"><strong>🧭 Explore this recipe:</strong>
+{% for meal in page.meals %}<a href="{{ '/meals/' | append: meal | append: '/' | relative_url }}">🍽️ {{ meal | capitalize }}</a>{% endfor %}
+{% for cuisine in page.cuisines %}<a href="{{ '/cuisines/' | append: cuisine | append: '/' | relative_url }}">🌍 {{ cuisine | replace: '-', ' ' | capitalize }}</a>{% endfor %}
+{% for taste in page.tastes %}<a href="{{ '/tastes/' | append: taste | append: '/' | relative_url }}">😋 {{ taste | capitalize }}</a>{% endfor %}
+</div>
+<table><tr><th>⏱️ Time</th><th>👩‍🍳 Effort</th><th>🍽️ Servings</th></tr><tr><td>⏳ To verify</td><td>🔎 To verify</td><td>🔎 To verify</td></tr></table>
+<h2>🛒 Ingredients</h2><p>☐ Ingredients not provided by the saved playlist archive. Check the original video.</p>
+<h2>🔪 Before you start</h2><p>☐ Preparation instructions awaiting verification.</p>
+<h2>🍳 Cooking method</h2><p>Written cooking steps have not yet been verified against the original video.</p>
+<p class="watch"><a href="https://www.youtube.com/watch?v={{ page.video_id }}">▶️ Watch the original cooking video</a></p>
+<p><a href="{{ '/catalogue/' | relative_url }}">⬅️ All recipes</a> · <a href="{{ '/' | relative_url }}">🏡 Home</a></p>

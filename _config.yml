@@ -1,0 +1,7 @@
+title: CookeryBookery
+description: "Ammu & Achu's happy little cookbook ❤️"
+markdown: kramdown
+permalink: pretty
+url: ""
+baseurl: "/CookeryBookery"
+exclude: [README.md, data, REVIEW_QUEUE.md, PUBLISHING_CHECKLIST.md]
