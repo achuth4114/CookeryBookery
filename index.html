@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Search and browse the videos in Ammu and Achu’s MyCookingList.">
+  <meta name="theme-color" content="#244033">
+  <title>CookeryBookery</title>
+  <link rel="stylesheet" href="./assets/site.css">
+  <script src="./assets/site.js" type="module"></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#catalogue">Skip to recipes</a>
+  <header class="masthead">
+    <div class="container masthead-inner">
+      <a class="wordmark" href="#top" aria-label="CookeryBookery home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3.5 12.5h17C20 17 17 19 12 19s-8-2-8.5-6.5ZM8 21h8M9 9c-1.5-1.1-1.4-2.3 0-3.4m4 3.4c-1.5-1.1-1.4-2.3 0-3.4m4 3.4c-1.5-1.1-1.4-2.3 0-3.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        CookeryBookery
+      </a>
+      <nav aria-label="Cookbook navigation" class="navigation">
+        <a class="nav-link" href="#catalogue" id="browse-link" aria-current="page">Browse</a>
+        <button class="nav-link" type="button" id="saved-link" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 4h12v16l-6-4-6 4V4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          Saved<span class="saved-total" id="saved-total" hidden></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" aria-labelledby="welcome-heading">
+      <div class="hero-photo" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="kicker">Ammu &amp; Achu’s home cookbook</p>
+        <h1 id="welcome-heading">What shall we<br><em>cook today?</em></h1>
+        <p>Find a favourite from MyCookingList or pick something new to try.</p>
+      </div>
+    </section>
+
+    <section id="catalogue" class="catalogue" aria-labelledby="catalogue-heading">
+      <div class="section-title">
+        <h2 id="catalogue-heading" tabindex="-1">Browse recipes</h2>
+        <button class="text-button" type="button" id="about-link">About the catalogue</button>
+      </div>
+      <form id="filters" class="filters" role="search" aria-label="Filter recipes">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.5" stroke="currentColor" stroke-width="1.8"/><path d="m15 15 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <label class="visually-hidden" for="search">Search recipes or channels</label>
+          <input id="search" type="search" placeholder="Search biryani or മീൻ കറി" autocomplete="off" enterkeyhint="search">
+          <button type="button" class="clear-search" id="clear-search" aria-label="Clear search" hidden>×</button>
+        </div>
+        <div class="meal-buttons" id="meal-buttons" role="group" aria-label="Meal category">
+          <button type="button" class="chip" data-meal="" aria-pressed="true">All recipes</button>
+          <button type="button" class="chip" data-meal="breakfast" aria-pressed="false">Breakfast</button>
+          <button type="button" class="chip" data-meal="lunch" aria-pressed="false">Lunch</button>
+          <button type="button" class="chip" data-meal="dinner" aria-pressed="false">Dinner</button>
+          <button type="button" class="chip" data-meal="snacks" aria-pressed="false">Snacks</button>
+          <button type="button" class="chip" data-meal="desserts" aria-pressed="false">Desserts</button>
+        </div>
+        <div class="facets">
+          <label class="facet" for="cuisine">Cuisine
+            <select id="cuisine"><option value="">All cuisines</option></select>
+          </label>
+          <label class="facet" for="taste">Taste
+            <select id="taste"><option value="">All tastes</option></select>
+          </label>
+          <label class="facet" for="sort">Sort by
+            <select id="sort">
+              <option value="picks">Featured first</option>
+              <option value="playlist">Playlist order</option>
+              <option value="title">Title A–Z</option>
+            </select>
+          </label>
+          <label class="language-filter"><input type="checkbox" id="malayalam"><span>Malayalam titles</span></label>
+        </div>
+      </form>
+
+      <div class="results-bar">
+        <p id="results-count" role="status">Loading recipes…</p>
+        <button type="button" class="text-button" id="reset-filters" hidden>Clear filters</button>
+      </div>
+      <div class="recipe-grid" id="recipe-grid"></div>
+      <div class="empty-state" id="empty-state" hidden>
+        <h3 id="empty-heading"></h3>
+        <p id="empty-text"></p>
+        <button type="button" id="empty-action" class="button-primary"></button>
+      </div>
+      <div class="more-row">
+        <button type="button" id="load-more" class="button-secondary" hidden>Show more recipes</button>
+      </div>
+      <noscript><p>Enable JavaScript to search and filter the cookbook. <a href="./catalogue.json">Open the saved video catalogue</a>.</p></noscript>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a class="wordmark" href="#top">CookeryBookery</a>
+      <span>From the MyCookingList archive</span>
+      <a href="#top" class="text-button">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <dialog id="recipe-dialog" class="dialog" aria-labelledby="recipe-heading">
+    <div class="dialog-inner">
+      <button class="dialog-close" type="button" data-close aria-label="Close recipe details">×</button>
+      <div class="detail-image-wrap" id="detail-image-wrap"></div>
+      <div class="detail-body">
+        <p class="source-label">Confirmed in the saved playlist</p>
+        <h2 id="recipe-heading" tabindex="-1"></h2>
+        <p id="detail-meta" class="detail-meta"></p>
+        <div class="detail-actions">
+          <a id="detail-watch" class="button-primary" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a>
+          <button id="detail-save" class="button-secondary" type="button" aria-pressed="false"></button>
+        </div>
+        <div class="detail-section">
+          <h3>Suggested browse tags</h3>
+          <div class="detail-tags" id="detail-tags"></div>
+        </div>
+        <div class="detail-section">
+          <h3>General guidance</h3>
+          <p>Ingredients, quantities, cooking time and method still need video verification. Check the original video and its description for the creator’s instructions.</p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="about-dialog" class="dialog about-dialog" aria-labelledby="about-heading">
+    <div class="dialog-inner detail-body">
+      <button class="dialog-close" type="button" data-close aria-label="Close catalogue information">×</button>
+      <h2 id="about-heading">About the catalogue</h2>
+      <h3>Confirmed in the saved playlist</h3>
+      <p id="archive-summary"></p>
+      <h3>Suggested categories</h3>
+      <p>Meal, cuisine and taste tags come from the draft or the video titles. Use them to browse. Some videos have incomplete tags.</p>
+      <h3>General guidance</h3>
+      <p>Use the original videos for ingredients and cooking steps. Video length describes the clip. Favourites are saved in this browser.</p>
+    </div>
+  </dialog>
+
+  <template id="card-template">
+    <article class="recipe-card">
+      <div class="card-photo"><span class="duration" hidden></span></div>
+      <button type="button" class="card-save" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 4h12v16l-6-4-6 4V4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="card-copy">
+        <div class="card-tags"></div>
+        <h3><button type="button" class="card-title"></button></h3>
+        <p class="card-channel"></p>
+        <a class="card-watch" target="_blank" rel="noopener noreferrer">Watch on YouTube <span aria-hidden="true">↗</span></a>
+      </div>
+    </article>
+  </template>
+</body>
+</html>

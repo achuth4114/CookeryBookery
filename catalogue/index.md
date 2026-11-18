@@ -1,13 +1,12 @@
 ---
-layout: default
-title: "📚 Complete Recipe Catalogue"
+layout: null
 permalink: /catalogue/
 ---
-# 📚 All 186 saved videos
-
-[🏡 Home]({{ '/' | relative_url }})
-
-{% assign recipes = site.pages | where: "layout", "recipe" | sort: "title" %}
-{% for recipe in recipes %}
-- 🍴 [{{ recipe.title }}]({{ recipe.url | relative_url }})
-{% endfor %}
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="0; url={{ '/' | relative_url }}#catalogue">
+<title>Recipe catalogue · CookeryBookery</title>
+<p><a href="{{ '/' | relative_url }}#catalogue">Open the searchable recipe catalogue</a>.</p>
+</html>

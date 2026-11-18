@@ -6,28 +6,22 @@
 
 > Our mission: Ammu and Achu shouldn't have to spend ages trying to figure out what they want to eat. Here's our collection of saved recipes, just a few clicks away. 🧡
 
-![CookeryBookery banner](assets/banner.svg)
+[Open CookeryBookery on GitHub Pages](https://achuth4114.github.io/CookeryBookery/)
 
-## 🍽️ What are we eating today?
+The cookbook brings together the saved MyCookingList videos with English and
+Malayalam search, combined filters and favourites stored in each browser.
+The archive provides the titles, video links, channel names and video lengths.
+Browse tags are suggestions. Use the original YouTube videos for ingredients
+and instructions.
 
-| 🥞 Breakfast | 🍛 Lunch |
-|---|---|
-| [Good mornings](meals/breakfast/) | [Midday favourites](meals/lunch/) |
-| 🥟 Snacks | 🍲 Dinner |
-| [Little cravings](meals/snacks/) | [Something comforting](meals/dinner/) |
+## Updating the catalogue
 
-### 🧭 Explore
+Run `python3 scripts/import_catalogue.py path/to/saved-playlist.html` from the
+checkout. The importer uses the meal, cuisine and taste tags in `recipes/`,
+writes `catalogue.json` and keeps the original video IDs and timestamps.
+Keep the saved YouTube HTML outside the repository. Thumbnails are loaded
+from YouTube using the video IDs.
 
-- 📚 [Browse all 186 saved videos](catalogue/)
-- 🌍 [Find by cuisine](cuisines/)
-- 😋 [Find by taste](tastes/)
-
-🧄 A little garlic · 🌶️ A pinch of spice · ❤️ Lots of love
-
-> 📝 **Draft note:** Titles and original video links are extracted from the saved YouTube HTML. Classification is provisional; cooking times, ingredients and methods await source verification.
-
-### 🌟 Start here
-
-- [First 10 featured recipe cards](FEATURED_RECIPES.md)
-- [Classification review queue](REVIEW_QUEUE.md)
-- [Publishing checklist](PUBLISHING_CHECKLIST.md)
+The homepage and its assets are static. Run `python3 -m http.server 8000` to
+preview the recipe browser. GitHub Pages serves the homepage and the existing
+Jekyll recipe and category links from this repository.
